@@ -19,7 +19,6 @@ const folder = {
     build_scss: "build/css/",
     build_js: "build/js/",
     build_img: "build/images/",
-    build_videos:"build/videos",
     build_plugins: "build/plugins/"
 };
 
@@ -156,21 +155,6 @@ function img() {
         })
         .pipe(browserSync.stream());
 }
-function video() {
-    console.log(':film_camera: Copying videos...');
-    return gulp
-        .src(folder.src + "videos/**/*.{mp4,webm,ogg,mov,avi,flv,mkv}", {
-            allowEmpty: true,
-            encoding: false,
-            base: folder.src
-        })
-        .pipe(newer(folder.build + "videos/"))
-        .pipe(gulp.dest(folder.build))
-        .on('end', () => {
-            console.log(':white_tick: Videos copied successfully!');
-        })
-        .pipe(browserSync.stream());
-}
 
 // Start BrowserSync server
 function serve(done) {
@@ -201,21 +185,20 @@ function watch() {
     console.log('👀 Watching files for changes...');
     gulp.watch(folder.src + "html/**/*", gulp.series(html, reload));
     gulp.watch(folder.src + "images/**/*", gulp.series(img, reload));
-    gulp.watch(folder.src + "videos/**/*", gulp.series(video, reload));
     gulp.watch(folder.src + "scss/**/*", gulp.series(styles, reload));
     gulp.watch(folder.src + "js/**/*", gulp.series(gulp.parallel(js, jsBundle), reload));
 }
 
 // Development task
 gulp.task("dev", gulp.series(
-    gulp.parallel(thirdParty, html, img,video, styles, js, jsBundle),
+    gulp.parallel(thirdParty, html, img, styles, js, jsBundle),
     gulp.parallel(serve, watch)
 ));
 
 // Build task
 gulp.task("build", gulp.series(
     clean,
-    gulp.parallel(thirdParty, html, img,video, styles, js, jsBundle)
+    gulp.parallel(thirdParty, html, img, styles, js, jsBundle)
 ));
 
 // Default task
@@ -228,7 +211,6 @@ exports.styles = styles;
 exports.js = js;
 exports.jsBundle = jsBundle;
 exports.img = img;
-exports.video = video;
 exports.serve = serve;
 exports.watch = watch;
 exports.thirdParty = thirdParty;
