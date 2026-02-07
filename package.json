@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "gulp build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +14,7 @@
     "@babel/preset-env": "^7.28.3",
     "braces": "^3.0.3",
     "browser-sync": "^3.0.4",
-    "del": "^6.1.1",
+    "del": "^8.0.1",
     "gulp": "^5.0.1",
     "gulp-autoprefixer": "^10.0.0",
     "gulp-babel": "^8.0.0",
